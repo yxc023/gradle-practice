@@ -1,0 +1,74 @@
+apply plugin: "nu.studer.jooq"
+
+dependencies {
+    implementation "org.jooq:jooq:${jooqVersion}"
+    runtimeOnly "mysql:mysql-connector-java:${mysqlVersion}"
+    jooqRuntime "mysql:mysql-connector-java:${mysqlVersion}"
+}
+
+jooq {
+    version = jooqVersion
+    edition = 'OSS'
+    generateSchemaSourceOnCompilation = false
+    "${project.name}"(sourceSets.main) {
+        jdbc {
+            driver = jooqGenDataSourceDriver
+            url = jooqGenDataSourceUrl
+            user = jooqGenDataSourceUrlUser
+            password = jooqGenDataSourceUrlPassword
+        }
+        generator {
+            database {
+                name = 'org.jooq.meta.mysql.MySQLDatabase'
+                inputSchema = jooqGenDataSourceInputSchema
+                outputSchemaToDefault = true
+                includes = jooqGenIncludeTables
+
+                forcedTypes {
+                    forcedType {
+                        name = 'INTEGER'
+                        expression = '.*'
+                        types = 'TINYINT|TINYINT UNSIGNED|TINYINT\\(4\\)'
+                    }
+                }
+            }
+            generate {
+                deprecated = false
+                records = true
+                pojos = true
+                fluentSetters = true
+                javaTimeTypes = true
+            }
+            strategy {
+                name = null
+                matchers {
+                    tables {
+                        table {
+                            pojoClass {
+                                transform = 'PASCAL'
+                                expression = '\$0_Entity'
+                            }
+                            daoClass {
+                                transform = 'PASCAL'
+                                expression = '\$0_Entity_Dao'
+                            }
+                        }
+
+                    }
+                }
+            }
+            target {
+                packageName = jooqGenPackageName
+                directory = 'src/main/jooq'
+            }
+        }
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/jooq'
+        }
+    }
+}

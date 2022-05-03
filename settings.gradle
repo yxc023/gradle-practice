@@ -1,0 +1,14 @@
+pluginManagement {
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = 'gradle-practice'
+include 'gp-app'
+include 'gp-api'
+include 'gp-service'
+include 'gp-db'
+

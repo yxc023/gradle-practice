@@ -1,0 +1,5 @@
+ext {
+    jooqGenIncludeTables = 'table_a|table_b|table_c_*'
+    jooqGenPackageName = 'com.yangxiaochen.gradle.practice.db'
+}
+apply from: "${rootProject.projectDir}/gradle/jooq.gradle"
