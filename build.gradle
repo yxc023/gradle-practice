@@ -1,3 +1,7 @@
+/*
+为构建脚本引入依赖。
+在 「模块 gp-db」 中，我们使用了 jooq 生成代码的 plugin，所以，这里，会先把这个 plugin 的 library 引入进来
+ */
 buildscript {
     repositories {
         maven { url 'https://maven.aliyun.com/repository/public' }
@@ -9,7 +13,13 @@ buildscript {
     }
 }
 
+/*
+在多模块的项目中，根目录下的 build.gradle 文件，尽量把通用的全局配置都配置到这里
+
+「project」是 gradle 里的核心概念。每个 module 都是一个 project，根目录下是 rootProject
+ */
 allprojects {
+    // 定义所有项目的 group 和 version
     group = 'com.yangxiaochen.gradle.practice'
     version = '1.0.0-SNAPSHOT'
 
@@ -24,7 +34,7 @@ allprojects {
         mavenCentral()
     }
 
-    //定义一些变量
+    // 定义一些变量
     ext {
         mysqlVersion = '8.0.18'
         jooqVersion = '3.13.1'
@@ -34,7 +44,6 @@ allprojects {
         jooqGenDataSourceUrlPassword = 'test'
         jooqGenDataSourceInputSchema = 'gp_database'
     }
-
 
     dependencies {
         pmd 'com.alibaba.p3c:p3c-pmd:1.3.6'
