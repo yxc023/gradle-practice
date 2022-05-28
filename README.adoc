@@ -1,0 +1,5 @@
+# Gradle Practice
+
+A gradle build configuration example of a java project with multi modules
+
+一个多模块的 java 项目的 gradle 的构建配置例子

@@ -1,0 +1,4 @@
+// 只需额外定义该模块所需的依赖
+dependencies {
+    implementation 'org.greenrobot:eventbus:3.1.1'
+}

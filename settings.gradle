@@ -1,14 +1,23 @@
+// config plugin repositories
 pluginManagement {
     repositories {
-        maven { url 'https://maven.aliyun.com/repository/public' }
-        maven { url 'https://maven.aliyun.com/repository/central' }
+        // aliyun repository for gradle plugin
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        // default repository
         gradlePluginPortal()
     }
 }
 
+// set projects, root dir is root project. Each module is a sub project
 rootProject.name = 'gradle-practice'
+
+// include all sub projects. The name is location of the new project in the project hierarchy, for example 'a:b:c', not the file path
+// Sub project's default path is the '${rootDir}/${projectName}'.
 include 'gp-app'
+// use ':' as a separator of project.
 include 'gp-api'
-include 'gp-service'
+include 'gpService'
 include 'gp-db'
 
+// Set a custom path for a project
+project(':gpService').projectDir = new File(settingsDir, 'gp-service')

@@ -9,13 +9,20 @@ task javadocJar(type: Jar) {
     archiveClassifier = 'javadoc'
     from javadoc.destinationDir
 }
+
+
+if(!hasProperty('oss.publish.username') || !hasProperty('oss.publish.password')) {
+    ext['oss.publish.username'] = ''
+    ext['oss.publish.password'] = ''
+}
+
 publishing {
     publications {
         oss(MavenPublication) {
             pom {
-                name = "Expressive Exception: ${project.name}"
+                name = "Gradle practice: ${project.name}"
                 description = "${project.description}"
-                url = 'https://github.com/yxc023/expressive-exception'
+                url = 'https://github.com/yxc023/gradle-practice'
                 licenses {
                     license {
                         name = 'MIT License'
