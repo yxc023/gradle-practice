@@ -1,13 +1,13 @@
 apply plugin: "nu.studer.jooq"
 
-dependencies {
+project.dependencies {
     implementation "org.jooq:jooq:${jooqVersion}"
     runtimeOnly "mysql:mysql-connector-java:${mysqlVersion}"
     jooqRuntime "mysql:mysql-connector-java:${mysqlVersion}"
 }
 
-jooq {
-    version = jooqVersion
+project.jooq { jooqExtension ->
+    jooqExtension.version = jooqVersion
     edition = 'OSS'
     generateSchemaSourceOnCompilation = false
     "${project.name}"(sourceSets.main) {
