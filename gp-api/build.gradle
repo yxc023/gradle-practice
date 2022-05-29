@@ -1,1 +1,2 @@
+// 每一个需要发布的模块，可以配置这个
 apply from: "${rootProject.projectDir}/gradle/publish.gradle"

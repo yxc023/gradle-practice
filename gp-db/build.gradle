@@ -1,5 +1,8 @@
 ext {
+    // 设置 jooq 要生成的表
     jooqGenIncludeTables = 'table_a|table_b|table_c_*'
+    // 设置 jooq 生成代码的包
     jooqGenPackageName = 'com.yangxiaochen.gradle.practice.db'
 }
+// 引入 jooq 通用配置，每个需要生成数据库访问代码的模块，都可以引用这个
 apply from: "${rootProject.projectDir}/gradle/jooq.gradle"
