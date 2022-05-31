@@ -3,3 +3,5 @@
 A gradle build configuration example of a java project with multi modules
 
 一个多模块的 java 项目的 gradle 的构建配置例子
+
+https://blog.yangxiaochen.com/blog/2022/0504-gradle-practice.html#_%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E6%9E%84%E5%BB%BA%E8%84%9A%E6%9C%AC[如何理解构建脚本]
