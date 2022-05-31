@@ -19,7 +19,7 @@ buildscript {
 
 「project」是 gradle 里的核心概念。每个 module 都是一个 project，根目录下是 rootProject
  */
-allprojects { p ->
+allprojects { Project p ->
     // 定义所有项目的 group 和 version
     p.group = 'com.yangxiaochen.gradle.practice'
     p.version = '1.0.0-SNAPSHOT'
@@ -30,14 +30,15 @@ allprojects { p ->
     p.apply plugin: 'idea'
     apply plugin: 'pmd'
 
-    repositories {
-        maven { url 'https://maven.aliyun.com/repository/public' }
-        maven { url 'https://maven.aliyun.com/repository/central' }
+    p.repositories( { RepositoryHandler rh ->
+        rh.maven( { MavenArtifactRepository m ->
+            m.url('https://maven.aliyun.com/repository/public')
+        })
         mavenCentral()
-    }
+    })
 
     // 通过 ext 定义一些变量
-    ext {
+    p.ext {
         mysqlVersion = '8.0.18'
         jooqVersion = '3.13.1'
         jooqGenDataSourceDriver = 'com.mysql.jdbc.Driver'
@@ -48,17 +49,17 @@ allprojects { p ->
     }
 
     dependencies {
-        api
         pmd 'com.alibaba.p3c:p3c-pmd:1.3.6'
     }
 
     tasks.withType(JavaCompile) {
         options.encoding = "UTF-8"
     }
-    sourceCompatibility = 1.8
+    p.convention.sourceCompatibility = 1.8
     targetCompatibility = 1.8
 
-    pmd { PmdExtension pe ->
+
+    p.pmd( { PmdExtension pe ->
         pe.consoleOutput = true
         reportsDir = file("build/reports/pmd")
         ruleSets = [
@@ -74,7 +75,7 @@ allprojects { p ->
                 'java-ali-set',
         ]
         ignoreFailures = true
-    }
+    })
 }
 
 

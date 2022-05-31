@@ -9,6 +9,12 @@ task javadocJar(type: Jar) {
     archiveClassifier = 'javadoc'
     from javadoc.destinationDir
 }
+
+if(!hasProperty('oss.publish.username') || !hasProperty('oss.publish.password')) {
+    ext['oss.publish.username'] = ''
+    ext['oss.publish.password'] = ''
+}
+
 publishing {
     publications {
         oss(MavenPublication) {
